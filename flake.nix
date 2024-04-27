@@ -3,14 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    drduhConfig.url = "github:drduh/config";
-    drduhConfig.flake = false;
   };
 
   outputs = {
     self,
     nixpkgs,
-    drduhConfig,
   }: let
     mkSystem = system:
       nixpkgs.lib.nixosSystem {
@@ -26,7 +23,7 @@
               ...
             }: let
               gpgAgentConf = pkgs.runCommand "gpg-agent.conf" {} ''
-                sed '/pinentry-program/d' ${drduhConfig}/gpg-agent.conf > $out
+                sed '/pinentry-program/d' "${./gpg-agent.conf}" > $out
                 echo "pinentry-program ${pkgs.pinentry.curses}/bin/pinentry" >> $out
               '';
               viewYubikeyGuide = pkgs.writeShellScriptBin "view-yubikey-guide" ''
@@ -176,7 +173,7 @@
                   echo "Creating \$GNUPGHOME…"
                   install --verbose -m=0700 --directory="$GNUPGHOME"
                 fi
-                [ ! -f "$GNUPGHOME/gpg.conf" ] && cp --verbose "${drduhConfig}/gpg.conf" "$GNUPGHOME/gpg.conf"
+                [ ! -f "$GNUPGHOME/gpg.conf" ] && cp --verbose "${./gpg.conf}" "$GNUPGHOME/gpg.conf"
                 [ ! -f "$GNUPGHOME/gpg-agent.conf" ] && cp --verbose ${gpgAgentConf} "$GNUPGHOME/gpg-agent.conf"
                 echo "\$GNUPGHOME is \"$GNUPGHOME\""
               '';

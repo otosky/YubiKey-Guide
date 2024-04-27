@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "drduhConfig": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1697417581,
-        "narHash": "sha256-R45L/Xv3z0lJhGt781wDbjaq1qc+sGTmsUt+XHwgf4A=",
-        "owner": "drduh",
-        "repo": "config",
-        "rev": "8c21617100795fea2313656abdf25f93b98fdc30",
-        "type": "github"
-      },
-      "original": {
-        "owner": "drduh",
-        "repo": "config",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1706826059,
@@ -34,7 +18,6 @@
     },
     "root": {
       "inputs": {
-        "drduhConfig": "drduhConfig",
         "nixpkgs": "nixpkgs"
       }
     }
